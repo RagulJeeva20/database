@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.util.Scanner;
 
 
-public class database
+public class Database
 {
 
     public static void main(String[] args)
@@ -21,27 +21,27 @@ public class database
         username=s.next();
         System.out.println("Enter your password:");
         pass=s.next();
-        creation a1=creation.in(dbname,username,pass);
+        Creation a1= Creation.in(dbname,username,pass);
         a1.connecting();
         a1.terminate();
     }
-    public static class creation
+    public static class Creation
     {
         String dbname;
         String username;
         String pass;
         Connection conn;
 
-        private creation(String dbname, String username, String pass)
+        private Creation(String dbname, String username, String pass)
         {
             this.dbname = dbname;
             this.username = username;
             this.pass = pass;
 
         }
-        public static creation in(String dbname,String username,String pass)
+        public static Creation in(String dbname, String username, String pass)
         {
-            return new creation(dbname, username, pass);
+            return new Creation(dbname, username, pass);
         }
         void connecting()
         {
