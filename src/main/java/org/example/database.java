@@ -4,6 +4,8 @@ package org.example;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Database
@@ -15,11 +17,12 @@ public class Database
       String username;
       String pass;
       Scanner s =new Scanner(System.in);
-        System.out.println("Enter the database name:");
+        Logger l=Logger.getLogger("tyler");
+        l.info("Enter the database name:");
         dbname=s.next();
-        System.out.println("Enter your username:");
+        l.info("Enter your username:");
         username=s.next();
-        System.out.println("Enter your password:");
+        l.info("Enter your password:");
         pass=s.next();
         Creation a1= Creation.in(dbname,username,pass);
         a1.connecting();
@@ -31,7 +34,7 @@ public class Database
         String username;
         String pass;
         Connection conn;
-
+        Logger l=Logger.getLogger("tyler");
         private Creation(String dbname, String username, String pass)
         {
             this.dbname = dbname;
@@ -47,20 +50,20 @@ public class Database
         {
             try {
                 conn = DriverManager.getConnection(dbname, username, pass);
-                System.out.println("Connection has been successfully established");
+                l.info("Connection has been successfully established");
             } catch (Exception e) {
-                System.out.println(e);
+                l.log(Level.INFO,() -> String.valueOf(e));
             }
         }
         void terminate()
         {
             try {
                 conn.close();
-                System.out.println("Closed");
+                l.info("Closed");
             }
             catch(Exception e)
             {
-                System.out.println(e);
+                l.log(Level.INFO,() -> String.valueOf(e));
             }
         }
     }
