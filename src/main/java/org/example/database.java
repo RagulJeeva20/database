@@ -28,43 +28,4 @@ public class Database
         a1.connecting();
         a1.terminate();
     }
-    public static class Creation
-    {
-        String dbname;
-        String username;
-        String pass;
-        Connection conn;
-        Logger l=Logger.getLogger("tyler");
-        private Creation(String dbname, String username, String pass)
-        {
-            this.dbname = dbname;
-            this.username = username;
-            this.pass = pass;
-
-        }
-        public static Creation in(String dbname, String username, String pass)
-        {
-            return new Creation(dbname, username, pass);
-        }
-        void connecting()
-        {
-            try {
-                conn = DriverManager.getConnection(dbname, username, pass);
-                l.info("Connection has been successfully established");
-            } catch (Exception e) {
-                l.log(Level.INFO,() -> String.valueOf(e));
-            }
-        }
-        void terminate()
-        {
-            try {
-                conn.close();
-                l.info("Closed");
-            }
-            catch(Exception e)
-            {
-                l.log(Level.INFO,() -> String.valueOf(e));
-            }
-        }
-    }
 }
